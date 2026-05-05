@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Departamento 2 ambientes reformado en Villa Urquiza, CABA. MGR Inmobiliaria.">
+  <meta name="theme-color" content="#2d0a17">
+  <title>Depto. Villa Urquiza — 2 amb, 48 m² | MGR Inmobiliaria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dark:          '#2d0a17',
+            accent:        '#c93d65',
+            'accent-dark': '#a8305a',
+            light:         '#faf6f7',
+            muted:         '#6b3a45',
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style> html { scroll-behavior: smooth; } </style>
+</head>
+<body class="font-sans text-[#1a0a0e] antialiased">
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="sticky top-0 z-50 bg-dark transition-shadow duration-300">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-2.5">
+        <span class="text-white font-bold text-2xl tracking-tight">MGR</span>
+        <span class="text-white/40 text-sm font-medium hidden sm:inline">Inmobiliaria</span>
+      </a>
+      <div class="hidden md:flex items-center gap-6">
+        <a href="../index.html" class="text-white/60 hover:text-white text-sm transition-colors">Inicio</a>
+        <a href="../propiedades.html" class="text-white text-sm font-semibold transition-colors">Propiedades</a>
+        <a href="../quienes-somos.html" class="text-white/60 hover:text-white text-sm transition-colors">Quiénes somos</a>
+        <a href="https://wa.me/549XXXXXXXXXX?text=Hola%2C%20quisiera%20consultar%20con%20MGR%20Inmobiliaria" target="_blank" class="bg-accent hover:bg-accent-dark text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-200"><!-- REEMPLAZAR: WHATSAPP -->
+          Contactanos por WhatsApp
+        </a>
+      </div>
+      <button id="menu-toggle" class="md:hidden text-white p-1.5" aria-label="Menú">
+        <svg id="icon-menu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-white/10">
+      <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col gap-1">
+        <a href="../index.html" class="text-white/70 hover:text-white text-sm px-2 py-2.5 rounded-lg hover:bg-white/5 transition-colors">Inicio</a>
+        <a href="../propiedades.html" class="text-white font-semibold text-sm px-2 py-2.5 rounded-lg bg-white/5">Propiedades</a>
+        <a href="../quienes-somos.html" class="text-white/70 hover:text-white text-sm px-2 py-2.5 rounded-lg hover:bg-white/5 transition-colors">Quiénes somos</a>
+        <a href="https://wa.me/549XXXXXXXXXX?text=Hola%2C%20quisiera%20consultar%20con%20MGR%20Inmobiliaria" target="_blank" class="bg-accent hover:bg-accent-dark text-white text-sm font-medium px-4 py-3 rounded-xl text-center mt-2 transition-colors"><!-- REEMPLAZAR: WHATSAPP -->
+          Contactanos por WhatsApp
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- AVISO DEMO -->
+  <div class="bg-accent/10 border-b border-accent/20 px-4 py-3 text-center">
+    <p class="text-xs font-semibold text-accent">⚠ PROPIEDAD DE DEMOSTRACIÓN — Esta página es un ejemplo de diseño. No publicar como propiedad real.</p>
+  </div>
+
+  <!-- Volver -->
+  <div class="bg-white border-b border-gray-100 px-4 py-3">
+    <div class="max-w-5xl mx-auto">
+      <a href="../propiedades.html" class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-accent transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Volver al catálogo
+      </a>
+    </div>
+  </div>
+
+  <!-- GALERÍA -->
+  <section class="bg-light py-6 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid grid-cols-4 grid-rows-2 gap-2 h-72 md:h-96 rounded-2xl overflow-hidden">
+        <div class="col-span-4 md:col-span-2 row-span-2 bg-gradient-to-br from-dark via-[#3d1220] to-accent/25 flex items-center justify-center relative">
+          <svg class="w-16 h-16 text-white/10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span class="absolute bottom-3 left-3 text-white/40 text-xs">Foto principal<!-- REEMPLAZAR: IMAGEN --></span>
+        </div>
+        <div class="hidden md:flex col-span-2 bg-gradient-to-br from-[#4a1628] to-dark items-center justify-center relative">
+          <svg class="w-10 h-10 text-white/10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span class="absolute bottom-2 left-2 text-white/30 text-xs">Foto 2<!-- REEMPLAZAR --></span>
+        </div>
+        <div class="hidden md:flex col-span-1 bg-gradient-to-br from-dark to-accent/15 items-center justify-center relative">
+          <svg class="w-8 h-8 text-white/10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span class="absolute bottom-2 left-2 text-white/30 text-xs">Foto 3<!-- REEMPLAZAR --></span>
+        </div>
+        <div class="hidden md:flex col-span-1 bg-gradient-to-br from-[#3d1220] to-[#5c1f38]/40 items-center justify-center relative">
+          <svg class="w-8 h-8 text-white/10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span class="absolute bottom-2 left-2 text-white/30 text-xs">Foto 4<!-- REEMPLAZAR --></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENIDO -->
+  <section class="bg-white py-10 md:py-14 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+        <div class="lg:col-span-2 space-y-10">
+          <div>
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xs font-semibold text-accent uppercase tracking-wide">Villa Urquiza</span><!-- REEMPLAZAR -->
+              <span class="text-xs text-muted bg-light px-2 py-0.5 rounded-full">Departamento</span><!-- REEMPLAZAR -->
+            </div>
+            <h1 class="text-2xl md:text-3xl font-bold text-[#1a0a0e] mb-2">Departamento reformado con cocina abierta</h1><!-- REEMPLAZAR -->
+            <p class="text-muted text-sm">CABA · Villa Urquiza</p><!-- REEMPLAZAR -->
+          </div>
+
+          <div>
+            <h2 class="text-base font-semibold text-[#1a0a0e] mb-3">Descripción</h2>
+            <!-- REEMPLAZAR: descripción -->
+            <div class="text-muted text-sm leading-relaxed space-y-3">
+              <p>Departamento totalmente reformado en Villa Urquiza. Dos ambientes bien distribuidos con cocina abierta integrada al living, maximizando el espacio y la luminosidad. Primer piso contrafrente, muy tranquilo.</p>
+              <p>Reforma integral realizada en 2024: piso de porcelanato gris, cocina con muebles de melamina, baño completamente renovado con ducha y vanitory nuevo. Aberturas nuevas de aluminio.</p>
+              <p>A tres cuadras del subte B (Federico Lacroze) y a pasos del Parque Sarmiento. Zona comercial con todos los servicios.</p>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="text-base font-semibold text-[#1a0a0e] mb-4">Características principales</h2>
+            <!-- REEMPLAZAR -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div class="flex items-center gap-2 text-sm text-muted bg-light rounded-xl px-4 py-3"><svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Cocina abierta</div>
+              <div class="flex items-center gap-2 text-sm text-muted bg-light rounded-xl px-4 py-3"><svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Reformado 2024</div>
+              <div class="flex items-center gap-2 text-sm text-muted bg-light rounded-xl px-4 py-3"><svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>1° piso</div>
+              <div class="flex items-center gap-2 text-sm text-muted bg-light rounded-xl px-4 py-3"><svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Contrafrente</div>
+              <div class="flex items-center gap-2 text-sm text-muted bg-light rounded-xl px-4 py-3"><svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Subte a 3 cdras</div>
+              <div class="flex items-center gap-2 text-sm text-muted bg-light rounded-xl px-4 py-3"><svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Aberturas nuevas</div>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="text-base font-semibold text-[#1a0a0e] mb-4">Plano</h2>
+            <!-- PLANO: reemplazar por <img src="plano.jpg" ...> -->
+            <div class="h-52 bg-light rounded-2xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center gap-2">
+              <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+              <span class="text-sm text-gray-400 font-medium">Plano próximamente</span><!-- REEMPLAZAR: PLANO -->
+            </div>
+          </div>
+
+          <div>
+            <h2 class="text-base font-semibold text-[#1a0a0e] mb-4">Video / Recorrido virtual</h2>
+            <!-- VIDEO: reemplazar por iframe -->
+            <div class="h-52 bg-light rounded-2xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center gap-2">
+              <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              <span class="text-sm text-gray-400 font-medium">Video próximamente</span><!-- REEMPLAZAR: VIDEO -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="lg:col-span-1">
+          <div class="sticky top-24 bg-light rounded-2xl p-6 space-y-5">
+            <div>
+              <p class="text-xs text-muted uppercase tracking-wide mb-1">Precio</p>
+              <p class="text-2xl font-bold text-[#1a0a0e]">Consultar</p><!-- REEMPLAZAR -->
+            </div>
+            <hr class="border-gray-200">
+            <!-- REEMPLAZAR: ficha técnica -->
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between"><span class="text-muted">Tipo</span><span class="font-medium">Departamento</span></div>
+              <div class="flex justify-between"><span class="text-muted">Barrio</span><span class="font-medium">Villa Urquiza</span></div>
+              <div class="flex justify-between"><span class="text-muted">Ambientes</span><span class="font-medium">2</span></div>
+              <div class="flex justify-between"><span class="text-muted">Sup. total</span><span class="font-medium">48 m²</span></div>
+              <div class="flex justify-between"><span class="text-muted">Piso</span><span class="font-medium">1°</span></div>
+              <div class="flex justify-between"><span class="text-muted">Orientación</span><span class="font-medium">Contrafrente</span></div>
+              <div class="flex justify-between"><span class="text-muted">Antigüedad</span><span class="font-medium">Consultar</span></div>
+            </div>
+            <hr class="border-gray-200">
+            <!-- REEMPLAZAR: WHATSAPP -->
+            <a href="https://wa.me/549XXXXXXXXXX?text=Hola%2C%20quisiera%20consultar%20por%20el%20departamento%20en%20Villa%20Urquiza%20(2%20amb%2C%2048%20m%C2%B2)"
+               target="_blank"
+               class="flex items-center justify-center gap-2 w-full bg-accent hover:bg-accent-dark text-white font-semibold py-4 rounded-xl transition-colors duration-200 text-sm">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Consultar por WhatsApp
+            </a>
+            <p class="text-center text-muted text-xs">Respondemos el mismo día.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-dark border-t border-white/10 text-white py-8">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5"><span class="font-bold text-lg">MGR</span><span class="text-white/40 text-sm">Inmobiliaria en CABA</span></div>
+      <div class="flex gap-5 text-sm text-white/50">
+        <a href="../index.html" class="hover:text-white transition-colors">Inicio</a>
+        <a href="../propiedades.html" class="hover:text-white transition-colors">Propiedades</a>
+        <a href="../quienes-somos.html" class="hover:text-white transition-colors">Quiénes somos</a>
+      </div>
+      <p class="text-white/25 text-xs">© 2026 MGR. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <div class="fixed bottom-6 right-6 z-50 group">
+    <a href="https://wa.me/549XXXXXXXXXX?text=Hola%2C%20consulto%20por%20el%20departamento%20en%20Villa%20Urquiza" target="_blank"
+       class="flex items-center justify-center w-14 h-14 bg-accent hover:bg-accent-dark rounded-full shadow-lg transition-all duration-200 hover:scale-105" aria-label="Consultar"><!-- REEMPLAZAR: WHATSAPP -->
+      <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <span class="absolute right-16 top-1/2 -translate-y-1/2 bg-dark text-white text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-md">Consultar</span>
+  </div>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { navbar.classList.toggle('shadow-[0_4px_24px_rgba(0,0,0,0.35)]', window.scrollY > 10); });
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+      document.getElementById('icon-menu').classList.toggle('hidden');
+      document.getElementById('icon-close').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
