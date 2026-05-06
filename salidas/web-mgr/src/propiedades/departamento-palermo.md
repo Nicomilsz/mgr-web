@@ -1,6 +1,6 @@
 ---
 title: Departamento luminoso con balcón al frente
-publicada: true
+publicada: false
 destacada: false
 estado: borrador
 barrio: Palermo
