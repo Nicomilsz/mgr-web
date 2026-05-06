@@ -1,0 +1,40 @@
+{% set isHome = page.url == "/" %}
+{% set isPropiedades = "/propiedades/" in page.url or page.url == "/propiedades/" %}
+{% set isQuienesSomos = page.url == "/quienes-somos/" %}
+
+<nav id="navbar" class="sticky top-0 z-50 bg-dark transition-shadow duration-300">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2.5">
+      <span class="text-white font-bold text-2xl tracking-tight">MGR</span>
+      <span class="text-white/40 text-sm font-medium hidden sm:inline">Inmobiliaria</span>
+    </a>
+    <div class="hidden md:flex items-center gap-6">
+      <a href="/" class="{{ 'text-white font-semibold' if isHome else 'text-white/60 hover:text-white' }} text-sm transition-colors">Inicio</a>
+      <a href="/propiedades/" class="{{ 'text-white font-semibold' if isPropiedades else 'text-white/60 hover:text-white' }} text-sm transition-colors">Propiedades</a>
+      <a href="/quienes-somos/" class="{{ 'text-white font-semibold' if isQuienesSomos else 'text-white/60 hover:text-white' }} text-sm transition-colors">Quiénes somos</a>
+      <a href="https://wa.me/{{ site.wa.number }}?text={{ site.wa.msgGeneral }}" target="_blank"
+         class="bg-accent hover:bg-accent-dark text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-200">
+        Contactanos por WhatsApp
+      </a>
+    </div>
+    <button id="menu-toggle" class="md:hidden text-white p-1.5" aria-label="Menú">
+      <svg id="icon-menu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden border-t border-white/10">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col gap-1">
+      <a href="/" class="{{ 'text-white font-semibold bg-white/5' if isHome else 'text-white/70 hover:text-white hover:bg-white/5' }} text-sm px-2 py-2.5 rounded-lg transition-colors">Inicio</a>
+      <a href="/propiedades/" class="{{ 'text-white font-semibold bg-white/5' if isPropiedades else 'text-white/70 hover:text-white hover:bg-white/5' }} text-sm px-2 py-2.5 rounded-lg transition-colors">Propiedades</a>
+      <a href="/quienes-somos/" class="{{ 'text-white font-semibold bg-white/5' if isQuienesSomos else 'text-white/70 hover:text-white hover:bg-white/5' }} text-sm px-2 py-2.5 rounded-lg transition-colors">Quiénes somos</a>
+      <a href="https://wa.me/{{ site.wa.number }}?text={{ site.wa.msgGeneral }}" target="_blank"
+         class="bg-accent hover:bg-accent-dark text-white text-sm font-medium px-4 py-3 rounded-xl text-center mt-2 transition-colors">
+        Contactanos por WhatsApp
+      </a>
+    </div>
+  </div>
+</nav>

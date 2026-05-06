@@ -1,131 +1,219 @@
 # Sitio web MGR Inmobiliaria
 
-## Estructura del sitio
+Sitio estático generado con **Eleventy (11ty)** y administrado con **Decap CMS**.
+
+---
+
+## Estructura del proyecto
 
 ```
 web-mgr/
-├── index.html                          # Página principal — captación y tasación
-├── propiedades.html                    # Catálogo de propiedades
-├── quienes-somos.html                  # Página institucional
-└── propiedades/                        # Páginas individuales de propiedades
-    ├── departamento-palermo.html       # DEMO — reemplazar con propiedad real
-    ├── ph-belgrano.html                # DEMO — reemplazar con propiedad real
-    └── departamento-villa-urquiza.html # DEMO — reemplazar con propiedad real
+├── src/
+│   ├── index.njk                  # Página principal (captación / tasación)
+│   ├── propiedades.njk            # Catálogo de propiedades
+│   ├── quienes-somos.njk          # Página institucional
+│   ├── _includes/
+│   │   ├── layouts/
+│   │   │   ├── base.njk           # Shell HTML base (head, navbar, footer, WA)
+│   │   │   └── propiedad.njk      # Layout de página individual de propiedad
+│   │   ├── navbar.njk             # Barra de navegación
+│   │   ├── footer-full.njk        # Footer con contacto (usado en home)
+│   │   └── footer-slim.njk        # Footer compacto (resto de páginas)
+│   ├── _data/
+│   │   └── site.js                # Datos globales: WA, Instagram, email, año
+│   ├── propiedades/
+│   │   ├── propiedades.json       # Config de colección (layout + tag)
+│   │   └── *.md                   # Una propiedad por archivo Markdown
+│   ├── admin/
+│   │   ├── index.html             # Panel Decap CMS
+│   │   └── config.yml             # Configuración del CMS
+│   └── assets/
+│       └── uploads/               # Fotos subidas desde el CMS
+├── _site/                         # Salida del build (generado, no editar)
+├── .eleventy.js                   # Configuración de Eleventy
+├── package.json
+└── netlify.toml                   # Build config para Netlify (en raíz del repo)
 ```
 
 ---
 
-## ⚠ Advertencia importante antes de publicar
+## Correr localmente
 
-Las 3 páginas dentro de `propiedades/` son **propiedades de demostración ficticias**.
-**No publicar el sitio con estas propiedades** sin haberlas reemplazado por propiedades reales,
-o al menos sin haber eliminado el aviso de demo que aparece en cada página.
+```bash
+# Requiere Node.js 18+
+cd salidas/web-mgr
+npm install
+npm run dev
+```
 
----
+Abrí `http://localhost:8080` en el browser.
 
-## Antes de publicar — reemplazá los placeholders
+Para solo buildear sin servidor:
+```bash
+npm run build
+```
 
-### En los 5 archivos HTML principales:
-
-| Placeholder | Qué reemplazar | Dónde buscar en el HTML |
-|---|---|---|
-| `549XXXXXXXXXX` | Tu número de WhatsApp sin `+` ni espacios (ej: `5491156781234`) | Buscá `549XXXXXXXXXX` — hay múltiples apariciones por archivo |
-| `mgr_inmobiliaria` | Tu usuario de Instagram | Solo en `index.html` |
-| `contacto@mgr.com.ar` | Tu email de contacto | Solo en `index.html` |
-
-Usá **Buscar y Reemplazar** (Cmd+H en Mac, Ctrl+H en Windows) para reemplazar todas las apariciones de `549XXXXXXXXXX` en cada archivo.
+La salida queda en `_site/`.
 
 ---
 
-## Publicar en Netlify (más fácil — drag & drop)
+## Panel de administración (/admin)
 
-1. Entrá a **netlify.com** y creá una cuenta gratuita
-2. En el dashboard: **"Add new site" → "Deploy manually"**
-3. Arrastrá la carpeta `web-mgr` completa al área de drop
-4. Tu sitio queda publicado en una URL tipo `mgr-abc123.netlify.app`
-5. (Opcional) En **Site settings → Domain management** → vinculá tu dominio propio
+El panel CMS está en `/admin` del sitio publicado.
 
-## Publicar en Vercel
+### Cómo funciona la autenticación
 
-1. Entrá a **vercel.com** y creá una cuenta gratuita
-2. **"Add New → Project"** → subí la carpeta `web-mgr`
-3. Tu sitio queda publicado automáticamente
+- Se usa **GitHub como backend** (no Netlify Identity).
+- Solo usuarios con **acceso de escritura al repositorio** `Nicomilsz/mgr-web` pueden autenticarse.
+- La autenticación usa OAuth de GitHub, gestionado por Netlify como proxy OAuth.
 
----
+### Configuración necesaria en GitHub y Netlify (solo una vez)
 
-## Cómo abrir páginas individuales de propiedades
+**1. Crear OAuth App en GitHub:**
+- Ir a: `https://github.com/settings/developers` → OAuth Apps → New OAuth App
+- **Application name:** MGR Admin
+- **Homepage URL:** `https://TU-SITIO.netlify.app`
+- **Authorization callback URL:** `https://api.netlify.com/auth/done`
+- Copiar el **Client ID** y generar un **Client secret**
 
-Abrí `propiedades.html` en el browser y hacé clic en cualquier card — va a navegar a la página individual de esa propiedad en `propiedades/`.
+**2. Configurar en Netlify:**
+- Ir a: Site settings → Access control → OAuth
+- En "Authentication providers" → instalar GitHub
+- Pegar el Client ID y Client secret del paso anterior
 
-Para probar directamente: abrí `propiedades/departamento-palermo.html` desde tu carpeta local.
+> ⚠ NO activar Netlify Identity. Solo es la sección OAuth en Access control.
 
----
+### Cómo entrar al admin
 
-## Cómo reemplazar propiedades ficticias por reales
-
-### En `propiedades.html` (catálogo):
-1. Editá cada card `<!-- PROPIEDAD DEMO X -->` con los datos reales
-2. Actualizá el `href` del stretched link para que apunte a la nueva página individual
-3. Actualizá el barrio, tipo, ambientes y m²
-4. Cuando tengas propiedades reales, eliminá el aviso `<!-- Aviso cartera en desarrollo -->`
-
-### En cada página individual (`propiedades/`):
-Para agregar una propiedad real, copiá una de las páginas de demo y reemplazá:
-
-| Sección | Qué reemplazar |
-|---|---|
-| `<!-- REEMPLAZAR: IMAGEN -->` | Reemplazá el `div.photo-placeholder` por `<img src="foto.jpg" class="w-full h-full object-cover">` |
-| `<!-- REEMPLAZAR: PLANO -->` | Reemplazá el bloque de plano por `<img src="plano.jpg" ...>` |
-| `<!-- REEMPLAZAR: VIDEO -->` | Pegá el `<iframe>` de YouTube o Matterport en el bloque de video |
-| Descripción | Reemplazá el texto dentro de `<!-- REEMPLAZAR: descripción -->` |
-| Ficha técnica | Actualizá ambientes, m², piso, expensas, etc. |
-| Aviso DEMO | Eliminá el banner rojo de "PROPIEDAD DE DEMOSTRACIÓN" |
+1. Ir a `https://TU-SITIO.netlify.app/admin`
+2. Hacer clic en "Login with GitHub"
+3. Autorizar el acceso a la cuenta de GitHub
 
 ---
 
-## Para actualizar el sitio después de publicarlo
+## Cómo cargar una propiedad
 
-1. Editá los archivos HTML necesarios
-2. Volvé a Netlify/Vercel y subí la carpeta nuevamente (drag & drop)
+### Desde el panel admin (recomendado)
+
+1. Ir a `/admin` del sitio
+2. Ir a la colección **Propiedades** → **New Propiedades**
+3. Completar los campos:
+   - **Título**: nombre descriptivo
+   - **Barrio**, **Tipo**, **Ambientes**, etc.
+   - **Descripción**: texto libre
+   - **Características**: lista de features (una por línea)
+4. **No marcar "Publicada"** hasta tener todo completo
+5. Guardar → Decap CMS crea un commit en el repo automáticamente
+6. Netlify detecta el commit y hace el deploy
+
+### Manualmente (archivo Markdown)
+
+Crear `src/propiedades/nombre-propiedad.md` con este formato:
+
+```yaml
+---
+title: "Título de la propiedad"
+publicada: false
+destacada: false
+estado: borrador
+barrio: Palermo
+tipo: Departamento
+ambientes: 3
+dormitorios: 2
+banos: 1
+superficie_cubierta: 60
+superficie_total: 65
+precio_texto: "USD 120.000"
+expensas: "$45.000/mes"
+descripcion: "<p>Descripción de la propiedad...</p>"
+caracteristicas:
+  - "Balcón al frente"
+  - "Ascensor"
+fotos: []
+---
+```
+
+---
+
+## Cómo subir fotos
+
+### Desde el panel admin
+
+1. En el formulario de propiedad, ir al campo **Fotos**
+2. Hacer clic en **Add** → **Choose an image**
+3. Subir desde la computadora o elegir una existente
+4. Las fotos se guardan en `src/assets/uploads/`
+
+### Manualmente
+
+Copiar las fotos a `src/assets/uploads/` y referenciarlas en el frontmatter:
+
+```yaml
+fotos:
+  - "/assets/uploads/foto-1.jpg"
+  - "/assets/uploads/foto-2.jpg"
+```
+
+---
+
+## Cómo publicar o despublicar una propiedad
+
+### Publicar
+
+1. Abrir la propiedad en `/admin`
+2. Activar el toggle **Publicada** → `true`
+3. Cambiar **Estado** a `publicada`
+4. Guardar — la propiedad aparece en el catálogo en el próximo deploy
+
+### Despublicar
+
+1. Desactivar el toggle **Publicada** → `false`
+2. Guardar — desaparece del catálogo en el próximo deploy
+
+> Las propiedades con `publicada: false` no aparecen en `/propiedades/` pero sus URLs individuales siguen funcionando (útil para preview).
+
+---
+
+## Deploy automático en Netlify
+
+Cada vez que se guarda desde el panel (o se hace un `git push`):
+
+1. Decap CMS hace un commit en el repositorio GitHub
+2. Netlify detecta el commit automáticamente
+3. Netlify corre `npm run build` desde `salidas/web-mgr/`
+4. Publica el nuevo `_site/` en ~30-60 segundos
+
+El `netlify.toml` en la raíz del repo configura:
+```toml
+[build]
+  base    = "salidas/web-mgr"
+  command = "npm run build"
+  publish = "_site"
+```
+
+---
+
+## Datos globales del sitio
+
+Editar `src/_data/site.js` para cambiar número de WhatsApp, Instagram o email:
+
+```js
+module.exports = {
+  wa: {
+    number: "5491149808910",
+    ...
+  },
+  instagram: "mgr_inmobiliaria",
+  email: "contacto@mgr.com.ar",
+};
+```
 
 ---
 
 ## Dominio propio (recomendado)
 
-Podés conseguir un dominio `.com.ar` por ~$3 USD/año en **nic.ar**.
+Conseguir un dominio `.com.ar` por ~$3 USD/año en **nic.ar**.
 
-Sugerencias:
-- `mgrinmobiliaria.com.ar`
-- `mgr-propiedades.com.ar`
-- `mgrcaba.com.ar`
+Sugerencias: `mgrinmobiliaria.com.ar`, `mgr-propiedades.com.ar`, `mgrcaba.com.ar`
 
----
-
-## Futuro panel administrador
-
-Actualmente el sitio es completamente estático (HTML puro). Para agregar o editar propiedades hay que modificar los archivos HTML manualmente.
-
-En una próxima etapa se puede sumar un **CMS (Content Management System)** o backend que permita:
-- Agregar, editar y eliminar propiedades desde una interfaz visual (sin tocar código)
-- Subir fotos desde el panel
-- Gestionar leads y consultas recibidas por WhatsApp
-- Publicar en portales inmobiliarios directamente desde el panel
-
-**Opciones para esa etapa:**
-- **Netlify CMS / Decap CMS**: gratuito, se integra sobre el sitio estático actual sin cambiar la arquitectura
-- **Tina CMS**: interfaz visual en tiempo real, también sobre estático
-- **WordPress + WP2Static**: panel familiar, exporta a HTML estático para deploy gratuito
-- **Backend propio (Node/Django + base de datos)**: máxima flexibilidad, requiere hosting con servidor
-
-Esta evolución no requiere reescribir el sitio desde cero — se puede construir encima de la base actual.
-
----
-
-## Checklist antes de publicar
-
-- [ ] Número de WhatsApp reemplazado en los 5 archivos HTML
-- [ ] Instagram reemplazado en `index.html`
-- [ ] Email reemplazado en `index.html`
-- [ ] Páginas demo reemplazadas con propiedades reales (o eliminadas si no hay cartera aún)
-- [ ] Aviso "cartera en desarrollo" en `propiedades.html` actualizado o eliminado
-- [ ] Banners de demo eliminados de las páginas individuales
+En Netlify: Site settings → Domain management → Add custom domain.

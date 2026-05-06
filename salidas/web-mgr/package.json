@@ -1,0 +1,12 @@
+{
+  "name": "mgr-inmobiliaria-web",
+  "version": "1.0.0",
+  "description": "Sitio web MGR Inmobiliaria — Eleventy + Decap CMS",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve --port=8080"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

@@ -1,0 +1,155 @@
+backend:
+  name: github
+  repo: Nicomilsz/mgr-web
+  branch: main
+  base_url: https://api.netlify.com
+
+media_folder: "src/assets/uploads"
+public_folder: "/assets/uploads"
+
+locale: es
+
+collections:
+  - name: propiedades
+    label: Propiedades
+    label_singular: Propiedad
+    folder: src/propiedades
+    create: true
+    slug: "{{slug}}"
+    preview_path: "/propiedades/{{slug}}/"
+    editor:
+      preview: false
+    fields:
+      - label: "Título"
+        name: "title"
+        widget: "string"
+        hint: "Nombre descriptivo de la propiedad (ej: Departamento 3 ambientes con balcón)"
+
+      - label: "Publicada"
+        name: "publicada"
+        widget: "boolean"
+        default: false
+        hint: "Activar para que aparezca en el catálogo público"
+
+      - label: "Destacada"
+        name: "destacada"
+        widget: "boolean"
+        default: false
+        hint: "Marcar para mostrar primero en el catálogo"
+
+      - label: "Estado"
+        name: "estado"
+        widget: "select"
+        options:
+          - { label: "Publicada", value: "publicada" }
+          - { label: "Reservada", value: "reservada" }
+          - { label: "Vendida", value: "vendida" }
+          - { label: "Borrador", value: "borrador" }
+        default: "borrador"
+
+      - label: "Barrio"
+        name: "barrio"
+        widget: "string"
+        hint: "Ej: Palermo, Belgrano, Villa Urquiza"
+
+      - label: "Dirección aproximada"
+        name: "direccion_aproximada"
+        widget: "string"
+        required: false
+        hint: "No incluir número exacto. Ej: Av. Santa Fe al 3000"
+
+      - label: "Tipo"
+        name: "tipo"
+        widget: "select"
+        options:
+          - "Departamento"
+          - "Casa"
+          - "PH"
+          - "Local comercial"
+          - "Otro"
+
+      - label: "Ambientes"
+        name: "ambientes"
+        widget: "number"
+        required: false
+        value_type: "int"
+
+      - label: "Dormitorios"
+        name: "dormitorios"
+        widget: "number"
+        required: false
+        value_type: "int"
+
+      - label: "Baños"
+        name: "banos"
+        widget: "number"
+        required: false
+        value_type: "int"
+
+      - label: "Superficie cubierta (m²)"
+        name: "superficie_cubierta"
+        widget: "number"
+        required: false
+        value_type: "int"
+
+      - label: "Superficie total (m²)"
+        name: "superficie_total"
+        widget: "number"
+        required: false
+        value_type: "int"
+
+      - label: "Precio"
+        name: "precio_texto"
+        widget: "string"
+        default: "Consultar"
+        hint: "Ej: USD 120.000 o Consultar"
+
+      - label: "Expensas"
+        name: "expensas"
+        widget: "string"
+        required: false
+        hint: "Ej: $45.000/mes o Consultar"
+
+      - label: "Descripción"
+        name: "descripcion"
+        widget: "text"
+        required: false
+        hint: "Descripción comercial completa de la propiedad"
+
+      - label: "Características"
+        name: "caracteristicas"
+        widget: "list"
+        required: false
+        hint: "Una característica por línea. Ej: Balcón al frente"
+
+      - label: "Fotos"
+        name: "fotos"
+        widget: "list"
+        required: false
+        field:
+          label: "Foto"
+          name: "foto"
+          widget: "image"
+
+      - label: "Plano"
+        name: "plano"
+        widget: "image"
+        required: false
+
+      - label: "URL de video (YouTube embed)"
+        name: "video_url"
+        widget: "string"
+        required: false
+        hint: "URL del iframe de YouTube. Ej: https://www.youtube.com/embed/VIDEO_ID"
+
+      - label: "URL de tour virtual (Matterport embed)"
+        name: "tour_virtual_url"
+        widget: "string"
+        required: false
+        hint: "URL del iframe de Matterport. Ej: https://my.matterport.com/show/?m=MODEL_ID"
+
+      - label: "Mensaje WhatsApp personalizado (URL-encoded)"
+        name: "mensaje_whatsapp"
+        widget: "string"
+        required: false
+        hint: "Dejar vacío para usar el mensaje automático. Si completás, usá formato URL-encoded."
