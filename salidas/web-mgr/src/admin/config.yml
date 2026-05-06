@@ -4,7 +4,7 @@ backend:
   branch: main
   base_url: https://api.netlify.com
 
-media_folder: "src/assets/uploads"
+media_folder: "salidas/web-mgr/src/assets/uploads"
 public_folder: "/assets/uploads"
 
 locale: es
@@ -13,7 +13,7 @@ collections:
   - name: propiedades
     label: Propiedades
     label_singular: Propiedad
-    folder: src/propiedades
+    folder: salidas/web-mgr/src/propiedades
     create: true
     slug: "{{slug}}"
     preview_path: "/propiedades/{{slug}}/"
