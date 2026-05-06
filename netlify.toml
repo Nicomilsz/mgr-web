@@ -1,4 +1,5 @@
 [build]
+  base    = "salidas/web-mgr"
   command = "npm run build"
   publish = "_site"
 
