@@ -10,7 +10,9 @@
       "Bash(git remote *)",
       "Bash(git branch *)",
       "Bash(git push *)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(git -C /Users/nicomilsz/Desktop/Claude/espacio-de-trabajo-claude add .)",
+      "Bash(git -C /Users/nicomilsz/Desktop/Claude/espacio-de-trabajo-claude status)"
     ]
   }
 }
