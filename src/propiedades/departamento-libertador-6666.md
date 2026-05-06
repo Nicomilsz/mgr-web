@@ -1,6 +1,6 @@
 ---
 title: Departamento Libertador 6666
-publicada: false
+publicada: true
 destacada: true
 estado: publicada
 barrio: Belgrano
