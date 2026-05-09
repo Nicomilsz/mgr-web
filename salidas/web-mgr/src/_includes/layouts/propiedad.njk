@@ -2,16 +2,37 @@
 layout: base.njk
 ---
 
-{% set waMsg = mensaje_whatsapp or ("Hola%2C%20consulto%20por%20" + (title | encodeURIComponent) + "%20en%20" + (barrio | encodeURIComponent)) %}
+{# WhatsApp message #}
+{% if mensaje_whatsapp %}
+  {% set waMsg = mensaje_whatsapp %}
+{% else %}
+  {% set waMsg = "Hola%2C%20quiero%20consultar%20por%20la%20propiedad%20" + (title | encodeURIComponent) + "%20publicada%20en%20MGR." %}
+{% endif %}
+{% set waUrl = "https://wa.me/" + site.wa.number + "?text=" + waMsg %}
 
-<!-- Aviso demo -->
+{# Estado badge #}
+{% if estado == "publicada" %}
+  {% set estadoClass = "bg-emerald-50 text-emerald-700 border border-emerald-200" %}
+  {% set estadoLabel = "Disponible" %}
+{% elif estado == "reservada" %}
+  {% set estadoClass = "bg-amber-50 text-amber-700 border border-amber-200" %}
+  {% set estadoLabel = "Reservada" %}
+{% elif estado == "vendida" %}
+  {% set estadoClass = "bg-gray-100 text-gray-500 border border-gray-200" %}
+  {% set estadoLabel = "Vendida" %}
+{% elif estado and estado != "borrador" %}
+  {% set estadoClass = "bg-light text-muted border border-gray-200" %}
+  {% set estadoLabel = estado %}
+{% endif %}
+
+<!-- Demo banner -->
 {% if not publicada %}
 <div class="bg-accent/10 border-b border-accent/20 px-4 py-3 text-center">
   <p class="text-xs font-semibold text-accent">⚠ PROPIEDAD DE DEMOSTRACIÓN — Este es un ejemplo de diseño. No publicar como propiedad real.</p>
 </div>
 {% endif %}
 
-<!-- Volver al catálogo -->
+<!-- Barra de navegación secundaria -->
 <div class="bg-white border-b border-gray-100 px-4 py-3">
   <div class="max-w-5xl mx-auto">
     <a href="/propiedades/" class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-accent transition-colors">
@@ -23,78 +44,206 @@ layout: base.njk
   </div>
 </div>
 
-<!-- GALERÍA -->
-<section class="bg-light py-6 px-4">
-  <div class="max-w-5xl mx-auto">
+<!-- ═══════════════════════════════════════════ GALERÍA ═══ -->
+<section class="bg-[#1a0a0e]">
+  <div class="max-w-5xl mx-auto px-4 py-4">
+
     {% if fotos and fotos.length > 0 %}
-    <div class="grid grid-cols-4 grid-rows-2 gap-2 h-72 md:h-96 rounded-2xl overflow-hidden">
-      <div class="col-span-4 md:col-span-2 row-span-2 relative overflow-hidden">
+
+      {# Una sola foto: full width #}
+      {% if fotos.length == 1 %}
+      <div class="w-full h-64 md:h-[440px] rounded-2xl overflow-hidden">
         <img src="{{ fotos[0] }}" alt="{{ title }}" class="w-full h-full object-cover">
       </div>
-      {% if fotos[1] %}
-      <div class="hidden md:block col-span-2 relative overflow-hidden">
-        <img src="{{ fotos[1] }}" alt="{{ title }}" class="w-full h-full object-cover">
+
+      {# Dos fotos: lado a lado #}
+      {% elif fotos.length == 2 %}
+      <div class="h-64 md:h-[440px] rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div class="relative overflow-hidden">
+          <img src="{{ fotos[0] }}" alt="{{ title }}" class="w-full h-full object-cover">
+        </div>
+        <div class="hidden md:block relative overflow-hidden">
+          <img src="{{ fotos[1] }}" alt="{{ title }}" class="w-full h-full object-cover">
+        </div>
       </div>
+
+      {# Tres o más fotos: principal grande + miniaturas #}
       {% else %}
-      <div class="hidden md:block col-span-2 bg-gradient-to-br from-[#3d1220] to-dark"></div>
-      {% endif %}
-      {% if fotos[2] %}
-      <div class="hidden md:block col-span-1 relative overflow-hidden">
-        <img src="{{ fotos[2] }}" alt="{{ title }}" class="w-full h-full object-cover">
+      <div class="grid grid-cols-4 grid-rows-2 gap-2 h-64 md:h-[440px] rounded-2xl overflow-hidden">
+        <!-- Foto principal -->
+        <div class="col-span-4 md:col-span-3 row-span-2 relative overflow-hidden">
+          <img src="{{ fotos[0] }}" alt="{{ title }}" class="w-full h-full object-cover">
+        </div>
+        <!-- Miniatura 1 -->
+        <div class="hidden md:block col-span-1 row-span-1 relative overflow-hidden">
+          {% if fotos[1] %}
+          <img src="{{ fotos[1] }}" alt="{{ title }}" class="w-full h-full object-cover">
+          {% else %}
+          <div class="w-full h-full bg-gradient-to-br from-[#3d1220] to-dark"></div>
+          {% endif %}
+        </div>
+        <!-- Miniatura 2 (con contador si hay más) -->
+        <div class="hidden md:block col-span-1 row-span-1 relative overflow-hidden">
+          {% if fotos[2] %}
+          <img src="{{ fotos[2] }}" alt="{{ title }}" class="w-full h-full object-cover">
+          {% if fotos.length > 3 %}
+          <div class="absolute inset-0 bg-dark/65 flex items-center justify-center">
+            <span class="text-white font-semibold text-sm">+{{ fotos.length - 3 }} fotos</span>
+          </div>
+          {% endif %}
+          {% else %}
+          <div class="w-full h-full bg-gradient-to-br from-dark to-[#4a1628]"></div>
+          {% endif %}
+        </div>
       </div>
-      {% else %}
-      <div class="hidden md:block col-span-1 bg-gradient-to-br from-dark to-[#5c1f38]/50"></div>
       {% endif %}
-      {% if fotos[3] %}
-      <div class="hidden md:block col-span-1 relative overflow-hidden">
-        <img src="{{ fotos[3] }}" alt="{{ title }}" class="w-full h-full object-cover">
-      </div>
-      {% else %}
-      <div class="hidden md:block col-span-1 bg-gradient-to-br from-[#4a1628] to-accent/20"></div>
-      {% endif %}
-    </div>
+
     {% else %}
-    <div class="grid grid-cols-4 grid-rows-2 gap-2 h-72 md:h-96 rounded-2xl overflow-hidden">
-      <div class="col-span-4 md:col-span-2 row-span-2 bg-gradient-to-br from-dark via-[#4a1628] to-accent/40 flex items-center justify-center">
-        <svg class="w-16 h-16 text-white/10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-        </svg>
-      </div>
-      <div class="hidden md:block col-span-2 bg-gradient-to-br from-[#3d1220] to-dark"></div>
-      <div class="hidden md:block col-span-1 bg-gradient-to-br from-dark to-[#5c1f38]/50"></div>
-      <div class="hidden md:block col-span-1 bg-gradient-to-br from-[#4a1628] to-accent/20"></div>
+    <!-- Placeholder sin fotos -->
+    <div class="w-full h-56 md:h-80 rounded-2xl bg-gradient-to-br from-dark via-[#4a1628] to-accent/30 flex flex-col items-center justify-center gap-3">
+      <svg class="w-14 h-14 text-white/15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+      </svg>
+      <p class="text-white/25 text-sm">Fotos próximamente</p>
     </div>
     {% endif %}
+
   </div>
 </section>
 
-<!-- CONTENIDO PRINCIPAL -->
+<!-- ═══════════════════════════════════════════ ENCABEZADO ═══ -->
+<section class="bg-white border-b border-gray-100 px-4 py-6 md:py-8">
+  <div class="max-w-5xl mx-auto">
+
+    <!-- Badges: barrio, tipo, estado -->
+    <div class="flex flex-wrap items-center gap-2 mb-3">
+      <span class="text-xs font-semibold text-accent uppercase tracking-wide">{{ barrio }}</span>
+      <span class="text-muted/30 select-none">·</span>
+      <span class="text-xs text-muted bg-light px-2.5 py-1 rounded-full">{{ tipo }}</span>
+      {% if estadoLabel %}
+      <span class="text-xs font-semibold px-2.5 py-1 rounded-full {{ estadoClass }}">{{ estadoLabel }}</span>
+      {% endif %}
+    </div>
+
+    <h1 class="text-2xl md:text-3xl font-bold text-[#1a0a0e] mb-1.5">{{ title }}</h1>
+    <p class="text-muted text-sm">CABA · {{ barrio }}{% if direccion_aproximada %} · {{ direccion_aproximada }}{% endif %}</p>
+
+    <!-- Precio + CTA WhatsApp (solo visible en mobile; en desktop están en el sidebar) -->
+    <div class="mt-5 md:hidden">
+      <p class="text-xs text-muted uppercase tracking-wide mb-1">Precio</p>
+      <p class="text-2xl font-bold text-[#1a0a0e] mb-4">{{ precio_texto or "Consultar" }}</p>
+      <a href="{{ waUrl }}" target="_blank"
+         class="flex items-center justify-center gap-2 w-full bg-accent hover:bg-accent-dark text-white font-semibold py-4 rounded-xl transition-colors duration-200 text-sm">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Consultar por WhatsApp
+      </a>
+      <p class="text-center text-muted text-xs mt-2">Respondemos el mismo día.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ DATOS CLAVE ═══ -->
+{% if ambientes or dormitorios or banos or superficie_total or superficie_cubierta %}
+<section class="bg-light border-b border-gray-100 px-4 py-5">
+  <div class="max-w-5xl mx-auto">
+    <div class="flex flex-wrap gap-3">
+
+      {% if ambientes %}
+      <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3.5 shadow-sm">
+        <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+          <polyline stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <div>
+          <p class="text-[11px] text-muted leading-none mb-0.5">Ambientes</p>
+          <p class="text-base font-bold text-[#1a0a0e] leading-none">{{ ambientes }}</p>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if dormitorios %}
+      <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3.5 shadow-sm">
+        <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <rect x="2" y="7" width="20" height="14" rx="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill="none"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+        </svg>
+        <div>
+          <p class="text-[11px] text-muted leading-none mb-0.5">Dormitorios</p>
+          <p class="text-base font-bold text-[#1a0a0e] leading-none">{{ dormitorios }}</p>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if banos %}
+      <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3.5 shadow-sm">
+        <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 12h16M4 12a2 2 0 01-2-2V6a2 2 0 012-2h3.5M4 12v5a2 2 0 002 2h12a2 2 0 002-2v-5M7 4l-.5 3.5M12 4v8"/>
+        </svg>
+        <div>
+          <p class="text-[11px] text-muted leading-none mb-0.5">Baños</p>
+          <p class="text-base font-bold text-[#1a0a0e] leading-none">{{ banos }}</p>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if superficie_total %}
+      <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3.5 shadow-sm">
+        <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/>
+        </svg>
+        <div>
+          <p class="text-[11px] text-muted leading-none mb-0.5">Sup. total</p>
+          <p class="text-base font-bold text-[#1a0a0e] leading-none">{{ superficie_total }} m²</p>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if superficie_cubierta %}
+      <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3.5 shadow-sm">
+        <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" fill="none"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9h18M9 21V9"/>
+        </svg>
+        <div>
+          <p class="text-[11px] text-muted leading-none mb-0.5">Sup. cubierta</p>
+          <p class="text-base font-bold text-[#1a0a0e] leading-none">{{ superficie_cubierta }} m²</p>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if expensas %}
+      <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3.5 shadow-sm">
+        <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+        </svg>
+        <div>
+          <p class="text-[11px] text-muted leading-none mb-0.5">Expensas</p>
+          <p class="text-base font-bold text-[#1a0a0e] leading-none">{{ expensas }}</p>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ═══════════════════════════════════════════ CONTENIDO PRINCIPAL ═══ -->
 <section class="bg-white py-10 md:py-14 px-4">
   <div class="max-w-5xl mx-auto">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
 
-      <!-- Columna principal -->
+      <!-- ── Columna principal ── -->
       <div class="lg:col-span-2 space-y-10">
-
-        <!-- Encabezado -->
-        <div>
-          <div class="flex items-center gap-2 mb-3">
-            <span class="text-xs font-semibold text-accent uppercase tracking-wide">{{ barrio }}</span>
-            <span class="text-white/0 select-none">·</span>
-            <span class="text-xs text-muted bg-light px-2 py-0.5 rounded-full">{{ tipo }}</span>
-            {% if estado and estado != "publicada" %}
-            <span class="text-xs bg-dark/10 text-[#1a0a0e] px-2 py-0.5 rounded-full capitalize">{{ estado }}</span>
-            {% endif %}
-          </div>
-          <h1 class="text-2xl md:text-3xl font-bold text-[#1a0a0e] mb-2">{{ title }}</h1>
-          <p class="text-muted text-sm">CABA · {{ barrio }}</p>
-        </div>
 
         <!-- Descripción -->
         {% if descripcion %}
         <div>
-          <h2 class="text-base font-semibold text-[#1a0a0e] mb-3">Descripción</h2>
-          <div class="text-muted text-sm leading-relaxed space-y-3">
+          <h2 class="text-base font-semibold text-[#1a0a0e] mb-4">Descripción</h2>
+          <div class="text-muted text-sm leading-7 max-w-prose space-y-3">
             {{ descripcion | safe }}
           </div>
         </div>
@@ -103,7 +252,7 @@ layout: base.njk
         <!-- Características -->
         {% if caracteristicas and caracteristicas.length > 0 %}
         <div>
-          <h2 class="text-base font-semibold text-[#1a0a0e] mb-4">Características principales</h2>
+          <h2 class="text-base font-semibold text-[#1a0a0e] mb-4">Características</h2>
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {% for item in caracteristicas %}
             <div class="flex items-center gap-2 text-sm text-muted bg-light rounded-xl px-4 py-3">
@@ -116,6 +265,26 @@ layout: base.njk
           </div>
         </div>
         {% endif %}
+
+        <!-- Ubicación -->
+        <div>
+          <h2 class="text-base font-semibold text-[#1a0a0e] mb-4">Ubicación</h2>
+          <div class="bg-light rounded-2xl p-5 flex items-start gap-4">
+            <div class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-full bg-accent/10 mt-0.5">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-[#1a0a0e]">{{ barrio }}, CABA</p>
+              {% if direccion_aproximada %}
+              <p class="text-sm text-muted mt-0.5">{{ direccion_aproximada }}</p>
+              {% endif %}
+              <p class="text-xs text-muted/60 mt-2 italic">La dirección exacta se confirma al momento de la consulta.</p>
+            </div>
+          </div>
+        </div>
 
         <!-- Plano -->
         {% if plano %}
@@ -145,12 +314,23 @@ layout: base.njk
         </div>
         {% endif %}
 
+        <!-- CTA secundario: volver al catálogo -->
+        <div class="pt-4 border-t border-gray-100">
+          <a href="/propiedades/" class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-accent transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            Ver más propiedades
+          </a>
+        </div>
+
       </div>
 
-      <!-- Sidebar -->
+      <!-- ── Sidebar ── -->
       <div class="lg:col-span-1">
         <div class="sticky top-24 bg-light rounded-2xl p-6 space-y-5">
 
+          <!-- Precio -->
           <div>
             <p class="text-xs text-muted uppercase tracking-wide mb-1">Precio</p>
             <p class="text-2xl font-bold text-[#1a0a0e]">{{ precio_texto or "Consultar" }}</p>
@@ -158,11 +338,18 @@ layout: base.njk
 
           <hr class="border-gray-200">
 
+          <!-- Ficha técnica -->
           <div class="space-y-3 text-sm">
             {% if tipo %}
             <div class="flex justify-between">
               <span class="text-muted">Tipo</span>
               <span class="font-medium text-[#1a0a0e]">{{ tipo }}</span>
+            </div>
+            {% endif %}
+            {% if tipo_operacion %}
+            <div class="flex justify-between">
+              <span class="text-muted">Operación</span>
+              <span class="font-medium text-[#1a0a0e]">{{ tipo_operacion }}</span>
             </div>
             {% endif %}
             {% if barrio %}
@@ -208,16 +395,17 @@ layout: base.njk
             </div>
             {% endif %}
             {% if direccion_aproximada %}
-            <div class="flex justify-between">
-              <span class="text-muted">Zona</span>
-              <span class="font-medium text-[#1a0a0e] text-right max-w-[160px]">{{ direccion_aproximada }}</span>
+            <div class="flex justify-between gap-4">
+              <span class="text-muted flex-shrink-0">Zona</span>
+              <span class="font-medium text-[#1a0a0e] text-right">{{ direccion_aproximada }}</span>
             </div>
             {% endif %}
           </div>
 
           <hr class="border-gray-200">
 
-          <a href="https://wa.me/{{ site.wa.number }}?text={{ waMsg }}"
+          <!-- CTA WhatsApp -->
+          <a href="{{ waUrl }}"
              target="_blank"
              class="flex items-center justify-center gap-2 w-full bg-accent hover:bg-accent-dark text-white font-semibold py-4 rounded-xl transition-colors duration-200 text-sm">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -229,6 +417,7 @@ layout: base.njk
 
         </div>
       </div>
+
     </div>
   </div>
 </section>

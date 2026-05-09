@@ -68,6 +68,16 @@ collections:
           - "Local comercial"
           - "Otro"
 
+      - label: "Tipo de operación"
+        name: "tipo_operacion"
+        widget: "select"
+        options:
+          - { label: "Venta", value: "Venta" }
+          - { label: "Alquiler", value: "Alquiler" }
+        default: "Venta"
+        required: false
+        hint: "Venta o alquiler. Por defecto: Venta."
+
       - label: "Ambientes"
         name: "ambientes"
         widget: "number"
