@@ -1,9 +1,9 @@
 {
   "catalogo": {
     "modo": "oculto",
-    "mostrarAvisoCartera": true,
-    "avisoTitulo": "AAA",
-    "avisoTexto": "aaaa"
+    "mostrarAvisoCartera": false,
+    "avisoTitulo": "asda",
+    "avisoTexto": "asdada"
   },
   "contacto": {
     "whatsapp": "+1149808910"
