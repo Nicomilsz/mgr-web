@@ -6,7 +6,7 @@
   {% if barrio %}
     {% set metaDesc = (tipo or "Propiedad") + " en " + barrio + ", CABA. " + (precio_texto or "Consultá el precio") + ". Contacto directo con MGR Inmobiliaria." %}
   {% else %}
-    {% set metaDesc = description or "Inmobiliaria en CABA. Tasación gratuita, gestión profesional y trato directo." %}
+    {% set metaDesc = description or "Inmobiliaria en CABA. Tasación profesional, gestión clara y trato directo." %}
   {% endif %}
   <meta name="description" content="{{ metaDesc }}">
   {% if barrio and fotos and fotos.length > 0 %}

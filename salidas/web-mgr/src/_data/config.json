@@ -1,7 +1,7 @@
 {
   "catalogo": {
     "modo": "visible",
-    "mostrarAvisoCartera": true,
+    "mostrarAvisoCartera": false,
     "avisoTitulo": "Cartera en formación",
     "avisoTexto": "Estamos incorporando propiedades activas. Escribinos por WhatsApp para consultar disponibilidad real."
   },
