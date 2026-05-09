@@ -1,0 +1,11 @@
+{
+  "catalogo": {
+    "modo": "oculto",
+    "mostrarAvisoCartera": true,
+    "avisoTitulo": "AAA",
+    "avisoTexto": "aaaa"
+  },
+  "contacto": {
+    "whatsapp": "+1149808910"
+  }
+}
