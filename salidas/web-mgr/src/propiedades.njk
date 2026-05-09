@@ -5,78 +5,216 @@ description: Propiedades en venta en CABA — MGR Inmobiliaria. Consultanos por 
 permalink: /propiedades/index.html
 ---
 
+{# ── Configuración con fallbacks ── #}
+{% set modo        = config.catalogo.modo        if (config and config.catalogo and config.catalogo.modo)        else "visible" %}
+{% set avisoTitulo = config.catalogo.avisoTitulo if (config and config.catalogo and config.catalogo.avisoTitulo) else "Cartera en formación" %}
+{% set avisoTexto  = config.catalogo.avisoTexto  if (config and config.catalogo and config.catalogo.avisoTexto)  else "Estamos incorporando propiedades activas. Escribinos por WhatsApp para consultar disponibilidad real." %}
+{% set waNumber    = config.contacto.whatsapp    if (config and config.contacto and config.contacto.whatsapp)    else site.wa.number %}
+
+{# ══════════════════════════════════════════════════
+   MODO OCULTO
+   - Sin catálogo, sin propiedades
+   - Página de espera profesional
+   ══════════════════════════════════════════════════ #}
+{% if modo == "oculto" %}
+
+<section class="bg-dark text-white py-20 md:py-28 px-4">
+  <div class="max-w-xl mx-auto text-center">
+    <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-white/5 flex items-center justify-center">
+      <svg class="w-8 h-8 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 5h1m-1 0v-5"/>
+      </svg>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">Catálogo en preparación</h1>
+    <p class="text-white/60 text-base leading-relaxed mb-10 max-w-sm mx-auto">
+      Estamos armando nuestra cartera de propiedades para CABA. Escribinos directamente para consultar disponibilidad o contarnos qué estás buscando.
+    </p>
+    <a href="https://wa.me/{{ waNumber }}?text={{ site.wa.msgBusqueda }}" target="_blank"
+       class="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Consultanos por WhatsApp
+    </a>
+  </div>
+</section>
+
+{# ══════════════════════════════════════════════════
+   MODO EN FORMACIÓN
+   - Solo hero/card grande, sin propiedades
+   - Dos botones WhatsApp diferenciados
+   ══════════════════════════════════════════════════ #}
+{% elif modo == "en_formacion" %}
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    .ef-btn { transition: background-color 0.01ms !important; transform: none !important; box-shadow: none !important; }
+  }
+</style>
+
+<section class="bg-light min-h-[82vh] flex items-center py-16 md:py-24 px-4">
+  <div class="max-w-2xl mx-auto w-full">
+
+    <div class="bg-dark rounded-3xl overflow-hidden shadow-2xl">
+      <!-- Franja accent superior -->
+      <div class="h-[4px] bg-gradient-to-r from-accent to-accent-dark"></div>
+
+      <div class="px-8 md:px-14 py-12 md:py-16 text-center">
+
+        <!-- Ícono -->
+        <div class="w-16 h-16 mx-auto mb-7 rounded-2xl bg-white/[0.07] flex items-center justify-center">
+          <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 5h1m-1 0v-5"/>
+          </svg>
+        </div>
+
+        <!-- Eyebrow -->
+        <p class="text-accent text-[11px] font-semibold uppercase tracking-widest mb-4">Catálogo</p>
+
+        <!-- Título -->
+        <h1 class="text-3xl md:text-4xl font-bold text-white leading-tight mb-5">{{ avisoTitulo }}</h1>
+
+        <!-- Texto -->
+        <p class="text-white/60 text-base md:text-lg leading-relaxed max-w-lg mx-auto mb-10">
+          Estamos incorporando propiedades activas en CABA. Si estás buscando comprar, escribinos y te contamos la disponibilidad actual. Si querés vender, también podemos ayudarte a evaluar tu propiedad.
+        </p>
+
+        <!-- Divisor -->
+        <div class="w-10 h-px bg-white/10 mx-auto mb-10"></div>
+
+        <!-- Botones -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
+
+          <!-- Primario: consultar catálogo -->
+          <a href="https://wa.me/{{ waNumber }}?text=Hola%2C%20quiero%20consultar%20por%20el%20cat%C3%A1logo%20actual%20de%20propiedades%20de%20MGR."
+             target="_blank"
+             class="ef-btn inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-dark text-white font-semibold px-7 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg text-sm">
+            <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Consultar catálogo por WhatsApp
+          </a>
+
+          <!-- Secundario: ofrecer propiedad -->
+          <a href="https://wa.me/{{ waNumber }}?text=Hola%2C%20quiero%20ofrecer%20una%20propiedad%20en%20CABA%20para%20que%20la%20eval%C3%BAen%20en%20MGR."
+             target="_blank"
+             class="ef-btn inline-flex items-center justify-center gap-2 bg-white/[0.08] hover:bg-white/[0.13] border border-white/20 hover:border-white/30 text-white font-semibold px-7 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md text-sm">
+            <svg class="w-4 h-4 flex-shrink-0 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+            </svg>
+            Ofrecer mi propiedad
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{# ══════════════════════════════════════════════════
+   MODO VISIBLE
+   - CTA propietarios arriba
+   - Grid de propiedades publicadas
+   - Sin aviso de cartera
+   ══════════════════════════════════════════════════ #}
+{% else %}
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    .property-card { transition: box-shadow 0.01ms !important; }
+    .property-card:hover { transform: none !important; }
+    .prop-img { transition: none !important; transform: none !important; }
+    .prop-wa-btn, .cta-btn { transition: background-color 0.01ms !important; transform: none !important; box-shadow: none !important; }
+  }
+</style>
+
 <!-- HERO -->
 <section class="bg-dark text-white py-14 md:py-20 text-center px-4">
   <div class="max-w-5xl mx-auto">
     <h1 class="text-4xl md:text-5xl font-bold mb-4">Propiedades en venta</h1>
     <p class="text-white/60 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-      Estamos incorporando propiedades a nuestra cartera. Consultanos por disponibilidad actual o contanos qué estás buscando.
+      Encontrá tu próxima propiedad en CABA. Atención directa, seguimiento real y gestión profesional.
     </p>
   </div>
 </section>
 
-<!-- CATÁLOGO -->
-<section class="bg-light py-14 md:py-20 px-4">
+<!-- CTA PROPIETARIOS — arriba del listado -->
+<section class="bg-white px-4 pt-8 pb-2">
   <div class="max-w-5xl mx-auto">
+    <div class="bg-dark rounded-2xl overflow-hidden shadow-md">
+      <!-- Franja accent superior -->
+      <div class="h-[3px] bg-gradient-to-r from-accent to-accent-dark"></div>
+      <div class="px-7 py-6 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
 
-    {% set propiedadesPublicadas = collections.propiedades | selectattr("data.publicada") %}
+        <!-- Ícono + texto -->
+        <div class="flex items-start gap-4 flex-1 min-w-0">
+          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-xl bg-white/8 mt-0.5">
+            <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <p class="text-white/50 text-[11px] font-semibold uppercase tracking-widest mb-1">Para propietarios</p>
+            <h2 class="text-white font-bold text-[15px] leading-snug mb-1.5">¿Tenés una propiedad en CABA para vender?</h2>
+            <p class="text-white/55 text-sm leading-relaxed">Sumala a MGR y recibí una tasación inicial sin compromiso. Te acompañamos con una gestión clara, seguimiento y presencia digital.</p>
+          </div>
+        </div>
 
-    {% if not propiedadesPublicadas or propiedadesPublicadas.length == 0 %}
-    <!-- Aviso cartera en formación — se oculta automáticamente cuando haya propiedades publicadas -->
-    <div class="bg-white border border-accent/20 rounded-2xl p-6 mb-10 flex items-start gap-4">
-      <div class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-full bg-accent/10">
-        <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        </svg>
-      </div>
-      <div>
-        <p class="text-sm font-semibold text-[#1a0a0e] mb-0.5">Cartera en formación</p>
-        <p class="text-muted text-sm leading-relaxed">
-          Estamos incorporando propiedades activas.
-          <a href="https://wa.me/{{ site.wa.number }}?text={{ site.wa.msgBusqueda }}" target="_blank"
-             class="text-accent font-medium hover:underline">Escribinos por WhatsApp</a>
-          para consultar disponibilidad real.
-        </p>
+        <!-- Botón -->
+        <a href="https://wa.me/{{ waNumber }}?text={{ site.wa.msgTasacion }}" target="_blank"
+           class="cta-btn flex-shrink-0 w-full md:w-auto inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-dark text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg text-sm whitespace-nowrap">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Pedí tu tasación por WhatsApp
+        </a>
+
       </div>
     </div>
-    {% endif %}
+  </div>
+</section>
 
-    <!-- GRID -->
+<!-- GRID de propiedades -->
+<section class="bg-white px-4 pt-6 pb-16 md:pb-20">
+  <div class="max-w-5xl mx-auto">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
       {% for prop in collections.propiedades %}
         {% if prop.data.publicada %}
         {% set waMsg = prop.data.mensaje_whatsapp or ("Hola%2C%20consulto%20por%20" + (prop.data.title | encodeURIComponent)) %}
-        <div class="property-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 relative group cursor-pointer">
+
+        <div class="property-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 relative group cursor-pointer border border-gray-100 hover:border-gray-200">
           <a href="{{ prop.url }}" class="absolute inset-0 z-0 rounded-2xl" aria-label="Ver {{ prop.data.title }}"></a>
 
-          <!-- Foto o placeholder -->
           {% if prop.data.fotos and prop.data.fotos.length > 0 %}
           <div class="h-48 relative overflow-hidden">
-            <img src="{{ prop.data.fotos[0] }}" alt="{{ prop.data.title }}" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-dark/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              <span class="text-white text-sm font-semibold">Ver propiedad →</span>
+            <img src="{{ prop.data.fotos[0] }}" alt="{{ prop.data.title }}"
+                 class="prop-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-dark/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span class="text-white text-sm font-semibold tracking-wide">Ver propiedad →</span>
             </div>
           </div>
           {% else %}
           <div class="h-48 bg-gradient-to-br from-dark via-[#4a1628] to-accent/40 flex items-center justify-center relative overflow-hidden">
-            <svg class="w-14 h-14 text-white/15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-14 h-14 text-white/15 transition-transform duration-500 group-hover:scale-105" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
               <polyline stroke-linecap="round" stroke-linejoin="round" stroke-width="1" points="9 22 9 12 15 12 15 22"/>
             </svg>
-            <div class="absolute inset-0 bg-dark/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              <span class="text-white text-sm font-semibold">Ver propiedad →</span>
+            <div class="absolute inset-0 bg-dark/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span class="text-white text-sm font-semibold tracking-wide">Ver propiedad →</span>
             </div>
           </div>
           {% endif %}
 
-          <!-- Badge de estado -->
           {% if prop.data.estado and prop.data.estado != "publicada" %}
           <span class="absolute top-3 left-3 bg-dark/80 text-white text-xs font-semibold px-2.5 py-1 rounded-full capitalize z-10">
             {{ prop.data.estado }}
           </span>
           {% else %}
-          <span class="absolute top-3 left-3 bg-accent text-white text-xs font-semibold px-2.5 py-1 rounded-full z-10">Consultar</span>
+          <span class="absolute top-3 left-3 bg-accent text-white text-xs font-semibold px-2.5 py-1 rounded-full z-10">Disponible</span>
           {% endif %}
 
           <div class="p-5">
@@ -92,13 +230,14 @@ permalink: /propiedades/index.html
               {% if prop.data.ambientes %}<span>{{ prop.data.ambientes }} amb</span>{% endif %}
               {% if prop.data.superficie_total %}<span>{{ prop.data.superficie_total }} m²</span>{% endif %}
             </div>
-            <a href="https://wa.me/{{ site.wa.number }}?text={{ waMsg }}"
+            <a href="https://wa.me/{{ waNumber }}?text={{ waMsg }}"
                target="_blank"
-               class="relative z-10 block w-full text-center bg-accent hover:bg-accent-dark text-white text-sm font-semibold py-2.5 rounded-xl transition-colors duration-200">
+               class="prop-wa-btn relative z-10 block w-full text-center bg-accent hover:bg-accent-dark text-white text-sm font-semibold py-2.5 rounded-xl transition-all duration-200 hover:-translate-y-px hover:shadow-md">
               Consultar por WhatsApp
             </a>
           </div>
         </div>
+
         {% endif %}
       {% endfor %}
 
@@ -106,17 +245,4 @@ permalink: /propiedades/index.html
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section class="bg-dark text-white py-14 md:py-16 text-center px-4">
-  <div class="max-w-xl mx-auto">
-    <h2 class="text-2xl md:text-3xl font-bold mb-3">¿No encontrás lo que buscás?</h2>
-    <p class="text-white/60 text-base mb-8 leading-relaxed">Contanos qué tipo de propiedad necesitás y te avisamos en cuanto tengamos algo que se ajuste.</p>
-    <a href="https://wa.me/{{ site.wa.number }}?text={{ site.wa.msgBusqueda }}" target="_blank"
-       class="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-xl transition-colors duration-200">
-      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-      Escribinos por WhatsApp
-    </a>
-  </div>
-</section>
+{% endif %}

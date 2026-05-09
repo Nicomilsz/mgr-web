@@ -10,6 +10,56 @@ public_folder: "/assets/uploads"
 locale: es
 
 collections:
+  - name: settings
+    label: "Configuración del sitio"
+    files:
+      - name: general
+        label: "General"
+        file: "salidas/web-mgr/src/_data/config.json"
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: "Catálogo"
+            name: "catalogo"
+            widget: "object"
+            collapsed: false
+            fields:
+              - label: "Modo del catálogo"
+                name: "modo"
+                widget: "select"
+                options:
+                  - { label: "Visible (muestra propiedades normalmente)", value: "visible" }
+                  - { label: "En formación (aviso destacado + propiedades)", value: "en_formacion" }
+                  - { label: "Oculto (página de espera, sin catálogo)", value: "oculto" }
+                default: "visible"
+                hint: "Controla cómo se muestra la página /propiedades/."
+              - label: "Mostrar aviso de cartera"
+                name: "mostrarAvisoCartera"
+                widget: "boolean"
+                default: true
+                hint: "En modo Visible: activa o desactiva el aviso. En modo En formación: siempre visible."
+              - label: "Título del aviso"
+                name: "avisoTitulo"
+                widget: "string"
+                default: "Cartera en formación"
+                hint: "Encabezado del aviso que aparece en el catálogo."
+              - label: "Texto del aviso"
+                name: "avisoTexto"
+                widget: "text"
+                default: "Estamos incorporando propiedades activas. Consultanos para saber qué tenemos disponible o para contarnos qué estás buscando."
+                hint: "Descripción del aviso. Se muestra debajo del título."
+          - label: "Contacto"
+            name: "contacto"
+            widget: "object"
+            collapsed: false
+            fields:
+              - label: "WhatsApp principal"
+                name: "whatsapp"
+                widget: "string"
+                default: "5491149808910"
+                hint: "Sin + ni espacios. Ej: 5491149808910"
+
   - name: propiedades
     label: Propiedades
     label_singular: Propiedad
