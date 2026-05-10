@@ -5,18 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% if barrio %}
     {% set metaDesc = (tipo or "Propiedad") + " en " + barrio + ", CABA. " + (precio_texto or "Consultá el precio") + ". Contacto directo con MGR Inmobiliaria." %}
+    {% set metaTitle = (tipo or "Propiedad") + " en " + barrio + " | MGR Inmobiliaria" %}
   {% else %}
     {% set metaDesc = description or "Inmobiliaria en CABA. Tasación profesional, gestión clara y trato directo." %}
+    {% set metaTitle = seoTitle or (title + " | MGR Inmobiliaria" if title else "MGR Inmobiliaria | Tasación y venta de propiedades en CABA") %}
   {% endif %}
-  <meta name="description" content="{{ metaDesc }}">
   {% if barrio and fotos and fotos.length > 0 %}
-  <meta property="og:image" content="{{ fotos[0] }}">
+  {% set ogImage = fotos[0] %}
   {% else %}
-  <meta property="og:image" content="/assets/brand/mgr-logo-circular.png">
+  {% set ogImage = "/assets/brand/mgr-logo-circular.png" %}
   {% endif %}
+  <title>{{ metaTitle }}</title>
+  <meta name="description" content="{{ metaDesc }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ metaTitle }}">
+  <meta property="og:description" content="{{ metaDesc }}">
+  <meta property="og:image" content="{{ ogImage }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ metaTitle }}">
+  <meta name="twitter:description" content="{{ metaDesc }}">
   <meta name="theme-color" content="#2d0a17">
   <link rel="icon" type="image/png" href="/assets/brand/mgr-logo-circular.png">
-  <title>{% if title %}{{ title }} | {% endif %}MGR Inmobiliaria</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "MGR Inmobiliaria",
+    "description": "Inmobiliaria especializada en compra y venta de propiedades en CABA. Tasación profesional, gestión clara y trato directo.",
+    "url": "https://mgr.com.ar",
+    "logo": "https://mgr.com.ar/assets/brand/mgr-logo-circular.png",
+    "image": "https://mgr.com.ar/assets/brand/mgr-logo-circular.png",
+    "telephone": "+5491149808910",
+    "email": "contacto@mgr.com.ar",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Buenos Aires",
+      "addressRegion": "CABA",
+      "addressCountry": "AR"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Ciudad Autónoma de Buenos Aires"
+    },
+    "sameAs": [
+      "https://instagram.com/mgr_inmobiliaria"
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
