@@ -1,4 +1,5 @@
 module.exports = {
+  ga4Id: "G-M03941JQK0",
   wa: {
     number: "5491149808910",
     msgGeneral:  "Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20MGR%20Inmobiliaria.",
