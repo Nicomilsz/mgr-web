@@ -11,8 +11,11 @@
   <meta name="description" content="{{ metaDesc }}">
   {% if barrio and fotos and fotos.length > 0 %}
   <meta property="og:image" content="{{ fotos[0] }}">
+  {% else %}
+  <meta property="og:image" content="/assets/brand/mgr-logo-circular.png">
   {% endif %}
   <meta name="theme-color" content="#2d0a17">
+  <link rel="icon" type="image/png" href="/assets/brand/mgr-logo-circular.png">
   <title>{% if title %}{{ title }} | {% endif %}MGR Inmobiliaria</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">

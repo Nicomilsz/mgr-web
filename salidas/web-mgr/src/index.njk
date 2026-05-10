@@ -6,8 +6,16 @@ fullFooter: true
 ---
 
 <!-- HERO -->
-<section id="hero" class="bg-dark text-white">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-center">
+<section id="hero" class="bg-dark text-white relative overflow-hidden">
+  <!-- Marca de agua — solo desktop -->
+  <div class="hidden md:flex absolute inset-y-0 right-0 items-center pr-8 lg:pr-16 pointer-events-none select-none" aria-hidden="true">
+    <img src="/assets/brand/mgr-logo-circular.png" alt="" class="w-80 lg:w-[26rem] opacity-[0.055] object-contain">
+  </div>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-center relative z-10">
+    <!-- Badge de identidad -->
+    <div class="flex justify-center mb-8">
+      <img src="/assets/brand/mgr-logo-circular.png" alt="MGR" class="w-16 h-16 object-contain drop-shadow-xl">
+    </div>
     <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-5">
       Vendé tu propiedad en CABA<br class="hidden md:block">
       <span class="text-accent">con tasación profesional y estrategia clara</span>
@@ -68,6 +76,11 @@ fullFooter: true
         <p class="text-muted text-sm leading-relaxed">Ordenamos consultas, acompañamos visitas y mantenemos una comunicación clara durante todo el proceso.</p>
       </div>
 
+    </div>
+    <!-- Sello institucional -->
+    <div class="mt-10 pt-8 border-t border-gray-100 flex items-center justify-center gap-2.5">
+      <img src="/assets/brand/mgr-logo-circular.png" alt="MGR" class="h-5 w-5 object-contain opacity-40">
+      <span class="text-xs text-muted tracking-widest uppercase font-medium">MGR Inmobiliaria · CABA</span>
     </div>
   </div>
 </section>
