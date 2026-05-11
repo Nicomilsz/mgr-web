@@ -62,7 +62,8 @@
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -75,12 +76,18 @@
             light:         '#faf6f7',
             muted:         '#6b3a45',
           },
-          fontFamily: { sans: ['Inter', 'sans-serif'] }
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['DM Sans', 'sans-serif']
+          }
         }
       }
     }
   </script>
-  <style>html { scroll-behavior: smooth; }</style>
+  <style>
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
 </head>
 <body class="font-sans text-[#1a0a0e] antialiased">
 

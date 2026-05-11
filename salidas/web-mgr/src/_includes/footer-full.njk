@@ -1,45 +1,99 @@
-<footer id="contacto" class="bg-dark text-white py-12">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
-      <div class="flex flex-col items-start gap-2">
-        <img src="/assets/brand/mgr-logo-circular.png" alt="MGR" class="h-12 w-12 object-contain">
-        <div class="text-white/40 text-xs font-medium tracking-wide">Inmobiliaria en CABA</div>
+<footer id="contacto" class="bg-dark text-white relative overflow-hidden">
+
+  <!-- Borde superior con degradado centrado -->
+  <div class="h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
+
+  <!-- Marca de agua institucional -->
+  <div class="absolute -bottom-4 -right-4 pointer-events-none select-none" aria-hidden="true">
+    <img src="/assets/brand/mgr-logo-circular.png" alt="" class="w-32 opacity-[0.022] object-contain">
+  </div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-7 md:py-8 relative z-10">
+
+    <!-- Grilla 12 columnas: marca 3 · páginas 3 · contacto 6 -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-6 items-start">
+
+      <!-- A. Marca -->
+      <div class="md:col-span-3 flex flex-col items-center md:items-start gap-2.5 text-center md:text-left">
+        <img src="/assets/brand/mgr-logo-circular.png" alt="MGR Inmobiliaria"
+             class="w-[72px] h-[72px] md:w-[84px] md:h-[84px] object-contain drop-shadow-lg">
+        <div>
+          <p class="font-serif text-sm font-medium text-white mb-0.5">MGR Inmobiliaria</p>
+          <p class="text-white/35 text-xs leading-relaxed">Inmobiliaria boutique en CABA.</p>
+        </div>
       </div>
-      <div class="flex flex-col gap-2 text-sm text-white/50">
-        <p class="text-white/25 text-xs uppercase tracking-widest font-semibold mb-1">Páginas</p>
-        <a href="/" class="hover:text-white transition-colors">Inicio</a>
-        <a href="/propiedades/" class="hover:text-white transition-colors">Propiedades</a>
-        <a href="/tasacion-profesional/" class="hover:text-white transition-colors">Tasación profesional</a>
-        <a href="/quienes-somos/" class="hover:text-white transition-colors">Quiénes somos</a>
+
+      <!-- B. Páginas 2×2 -->
+      <div class="md:col-span-3 flex flex-col items-center md:items-start gap-2.5">
+        <p class="text-white/25 text-[10px] uppercase tracking-widest font-semibold">Páginas</p>
+        <div class="grid grid-cols-2 gap-x-5 gap-y-2">
+          <a href="/" class="text-white/50 text-sm hover:text-white transition-colors duration-200">Inicio</a>
+          <a href="/propiedades/" class="text-white/50 text-sm hover:text-white transition-colors duration-200">Propiedades</a>
+          <a href="/tasacion-profesional/" class="text-white/50 text-sm hover:text-white transition-colors duration-200">Tasación</a>
+          <a href="/quienes-somos/" class="text-white/50 text-sm hover:text-white transition-colors duration-200">Quiénes somos</a>
+        </div>
       </div>
-      <div class="flex flex-col sm:flex-row gap-5 text-sm text-white/60">
-        <a href="https://wa.me/{{ site.wa.number }}?text={{ site.wa.msgGeneral }}" target="_blank"
-           class="flex items-center gap-2 hover:text-white transition-colors"
-           data-analytics-event="whatsapp_click"
-           data-analytics-location="footer"
-           data-analytics-intent="contacto_general">
-          <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-          +54 9 11 4980-8910
-        </a>
-        <a href="https://instagram.com/{{ site.instagram }}" target="_blank"
-           class="flex items-center gap-2 hover:text-white transition-colors">
-          <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-          </svg>
-          @{{ site.instagram }}
-        </a>
-        <a href="mailto:{{ site.email }}" class="flex items-center gap-2 hover:text-white transition-colors">
-          <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-          </svg>
-          {{ site.email }}
-        </a>
+
+      <!-- C. Contacto — 6 columnas, fila horizontal en desktop -->
+      <div class="md:col-span-6 flex flex-col gap-2.5">
+        <p class="text-white/25 text-[10px] uppercase tracking-widest font-semibold text-center md:text-left">Contacto</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/{{ site.wa.number }}?text={{ site.wa.msgGeneral }}" target="_blank"
+             class="flex flex-col gap-1.5 p-3 border border-white/10 rounded-xl hover:border-accent/35 hover:bg-accent/[0.07] transition-all duration-200 group"
+             data-analytics-event="whatsapp_click"
+             data-analytics-location="footer"
+             data-analytics-intent="contacto_general">
+            <div class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              <span class="text-white/30 text-[9px] font-semibold uppercase tracking-widest">WhatsApp</span>
+            </div>
+            <p class="text-white/70 text-xs font-medium group-hover:text-white/95 transition-colors duration-200 leading-tight">+54 9 11 4980-8910</p>
+          </a>
+
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/{{ site.instagram }}" target="_blank"
+             class="flex flex-col gap-1.5 p-3 border border-white/10 rounded-xl hover:border-white/25 hover:bg-white/[0.05] transition-all duration-200 group"
+             data-analytics-event="social_click"
+             data-analytics-location="footer"
+             data-analytics-intent="instagram">
+            <div class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-white/45 flex-shrink-0 group-hover:text-white/75 transition-colors duration-200" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+              <span class="text-white/30 text-[9px] font-semibold uppercase tracking-widest">Instagram</span>
+            </div>
+            <p class="text-white/70 text-xs font-medium group-hover:text-white/95 transition-colors duration-200 leading-tight truncate">@{{ site.instagram }}</p>
+          </a>
+
+          <!-- Email -->
+          <a href="mailto:{{ site.email }}"
+             class="flex flex-col gap-1.5 p-3 border border-white/10 rounded-xl hover:border-white/25 hover:bg-white/[0.05] transition-all duration-200 group"
+             data-analytics-event="contact_click"
+             data-analytics-location="footer"
+             data-analytics-intent="email">
+            <div class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-white/45 flex-shrink-0 group-hover:text-white/75 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              <span class="text-white/30 text-[9px] font-semibold uppercase tracking-widest">Email</span>
+            </div>
+            <p class="text-white/70 text-xs font-medium group-hover:text-white/95 transition-colors duration-200 leading-tight truncate">{{ site.email }}</p>
+          </a>
+
+        </div>
       </div>
+
     </div>
-    <div class="border-t border-white/10 mt-10 pt-6 text-center text-white/25 text-xs">
-      © {{ site.year }} MGR. Todos los derechos reservados.
+
+    <!-- Línea inferior + copyright -->
+    <div class="border-t border-white/10 mt-6 pt-3.5 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p class="text-white/20 text-xs">© {{ site.year }} MGR Inmobiliaria. Todos los derechos reservados.</p>
+      <p class="text-white/15 text-xs tracking-widest uppercase">CABA · Argentina</p>
     </div>
+
   </div>
 </footer>
