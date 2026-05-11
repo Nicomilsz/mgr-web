@@ -4,7 +4,7 @@
 {% set isQuienesSomos = page.url == "/quienes-somos/" %}
 
 <nav id="navbar" class="sticky top-0 z-50 bg-dark transition-shadow duration-300">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-4 flex items-center justify-between">
     <a href="/" class="flex items-center gap-2.5">
       <img src="/assets/brand/mgr-logo-circular.png" alt="MGR" class="h-11 w-11 object-contain flex-shrink-0">
       <span class="text-white/70 text-sm font-medium hidden sm:inline">Inmobiliaria</span>
@@ -34,7 +34,7 @@
     </button>
   </div>
   <div id="mobile-menu" class="hidden md:hidden border-t border-white/10">
-    <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col gap-1">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
       <a href="/" class="{{ 'text-white font-semibold bg-white/5' if isHome else 'text-white/70 hover:text-white hover:bg-white/5' }} text-sm px-2 py-2.5 rounded-lg transition-colors">Inicio</a>
       {% if config.catalogo.modo != "oculto" %}
       <a href="/propiedades/" class="{{ 'text-white font-semibold bg-white/5' if isPropiedades else 'text-white/70 hover:text-white hover:bg-white/5' }} text-sm px-2 py-2.5 rounded-lg transition-colors">Propiedades</a>
