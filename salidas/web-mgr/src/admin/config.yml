@@ -3,6 +3,7 @@ backend:
   repo: Nicomilsz/mgr-web
   branch: main
   base_url: https://mgr-decap-oauth.nicomilsz.workers.dev
+  auth_endpoint: /auth
 
 media_folder: "salidas/web-mgr/src/assets/uploads"
 public_folder: "/assets/uploads"
