@@ -2,7 +2,7 @@ backend:
   name: github
   repo: Nicomilsz/mgr-web
   branch: main
-  base_url: https://api.netlify.com
+  base_url: https://mgr-decap-oauth.nicomilsz.workers.dev
 
 media_folder: "salidas/web-mgr/src/assets/uploads"
 public_folder: "/assets/uploads"
