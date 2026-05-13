@@ -1,0 +1,10 @@
+name = "mgr-decap-oauth"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+[vars]
+GITHUB_REPO_PRIVATE = "0"
+
+# Secrets — NO van en este archivo. Cargar con:
+#   npx wrangler secret put GITHUB_OAUTH_ID
+#   npx wrangler secret put GITHUB_OAUTH_SECRET
